@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Cronom.Samples.AngularJS.WebUI</title>
+
+    <link href="~/Content/styles/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Content/styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/styles/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/styles/site.css" rel="stylesheet" />
+    <script src="~/Content/scripts/libraries/jquery-2.1.4.min.js"></script>
+    <script src="~/Content/scripts/libraries/bootstrap.min.js"></script>
+    <script src="~/Content/scripts/libraries/bootbox.js"></script>
+    <script src="~/Content/scripts/libraries/angular.js"></script>
+    <script src="~/Content/scripts/application/sample-application.js"></script>
+    <script src="~/Content/scripts/components/cr-common.js"></script>
+    <script src="~/Content/scripts/components/root-controller.js"></script>
+</head>
+
+<body ng-app="sampleApplicationModule" ng-controller="rootController" ng-init="init()">
+
+    <nav class="navbar navbar-default navbar-inverse">
+        <div class="container menu-container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">Cronom.Samples.AngularJS Page</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container main-container" ng-cloak>
+        @RenderBody()
+    </div>
+
+    <div class="overlay" ng-show="displayBusyIndicator">
+        <div class="overlay-content">
+
+            <h3><span class="label label-info">
+                <img src="~/Content/images/loading.gif" />
+                Please Wait</span></h3>
+        </div>
+    </div>
+
+</body>
+</html>
