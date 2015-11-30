@@ -1,25 +1,32 @@
 ﻿<div class="btn-group cr-treelist">
 
     <div class="input-group">
-        <button ng-click="treeListModel.listVisible = !treeListModel.listVisible" type="button" class="btn {{treeListModel.buttonClass || 'btn-default'}}">
+        <button class="btn {{treeListModel.buttonClass || 'btn-default'}}" type="button" ng-click="treeListModel.listVisible = !treeListModel.listVisible">
             {{treeListModel.selectedItem.Title || treeListModel.placeholder || '-- Choose --'}}
             <span class="fa fa-caret-down"></span>
         </button>
+
         <span ng-if="treeListModel.defaultItem" ng-click="revertSelection()" class="input-group-addon btn" title="Revert to original"><i class="fa fa-repeat"></i></span>
         <span ng-click="clearSelection()" class="input-group-addon btn" title="Clear active selection"><i class="fa fa-remove"></i></span>
     </div>
 
-    <div class="cr-treelist-container" ng-show="treeListModel.listVisible">
-        <ul style="list-style: none;">
-            <li ng-repeat="item in treeListModel.data" ng-include="'treeListItemTemplate'"></li>
-        </ul>
+    <div class="cr-treelist-wrapper" ng-show="treeListModel.listVisible">
+
+        <input ng-if="treeListModel.useTextFilter" class="form-control filter-input" ng-model="treeListModel.textFilter" placeholder="text filter..." />
+
+        <div class="cr-treelist-container">
+            <ul style="list-style: none;">
+                <li ng-repeat="item in treeListModel.data" ng-include="'treeListItemTemplate'"></li>
+            </ul>
+        </div>
+
     </div>
 
     <script type="text/ng-template" id="treeListItemTemplate">
         
         <span class="cr-treelist-item-container" ng-class="{ 'selected':selectionHash==item.$$hashKey }">
             <span class="treelist-item-icon" ng-class="{ 'fa fa-plus-square': !item.expanded && item.Children.length>0, 'fa fa-minus-square': item.expanded }" ng-click="expandCollapseOnClick(item)"></span>&nbsp;
-            <span class="treelist-item-title" ng-click="itemOnClick(item)">{{item.Title}}</span>
+            <span class="treelist-item-title" ng-click="itemOnClick(item)" ng-class="{'unmatched-filter': matchHashes.indexOf(item.$$hashKey)==-1 && treeListModel.textFilter.length>0 && treeListModel.useTextFilter}">{{item.Title}}</span>
             <i ng-if="!treeListModel.initialSelected && treeListModel.defaultItem && treeListModel.defaultItem.Id === item.Id">
                 {{setItemPreselected(item)}}
             </i>
@@ -56,17 +63,24 @@
                     top: 10px;
                 }
 
+            /*div.cr-treelist div.cr-treelist-wrapper input.filter-input {
+                position: absolute;
+                top: 36px;
+                width: 100%;
+                z-index: 99;
+            }*/
+
             div.cr-treelist div.cr-treelist-container {
                 position: absolute;
                 top: 34px;
                 left: 0;
                 max-height: 300px;
-                height: 300px;
+                height: auto;
                 z-index: 99;
                 width: 100%;
                 overflow: hidden;
                 overflow-y: auto;
-                background: #FFF;
+                background: #EAEAEA;
                 padding: 4px;
                 border: 1px solid #ddd;
             }
@@ -106,5 +120,10 @@
                             div.cr-treelist div.cr-treelist-container ul li span.treelist-item-title {
                                 width: 90%;
                             }
+
+                                div.cr-treelist div.cr-treelist-container ul li span.treelist-item-title.unmatched-filter {
+                                    opacity: 0.5;
+                                    font-style: italic;
+                                }
     </style>
 </div>
