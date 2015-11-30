@@ -8,7 +8,9 @@
         var success = function (response) {
             $scope.treeListModel.data = response;
             $scope.treeListModel.placeholder = 'Select an item';
-            $scope.treeListModel.buttonClass = 'button-info';
+            $scope.treeListModel.buttonClass = 'btn-info';
+            $scope.treeListModel.defaultItem = { Id: 'GR' };
+            $scope.serializedOutput = JSON.stringify(response, undefined, 2);
         };
         crCommon.http.call(opts, success);
     };

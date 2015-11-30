@@ -7,11 +7,12 @@
     </div>
 
     <div class="col-md-6">
-        Selection: <br/>
-        <code>{{treeListModel.selectedItem|json}}</code>
-        <hr/>
+        Selection: <code>{{treeListModel.selectedItem.Title}} - {{treeListModel.selectedItem.$$hashKey}}</code>
+        <br />
+        <pre>{{treeListModel.selectedItem|json}}</pre>
+        <hr />
         Data:<br />
-        <code>{{treeListModel.data|json}}</code>
+        <pre>{{serializedOutput}}</pre>
     </div>
 
 </div>
