@@ -1,4 +1,4 @@
-﻿var layoutController = function ($scope, crCommon) {
+﻿var rootController = function ($scope, crCommon) {
 
     $scope.init = function () {
 
@@ -12,7 +12,7 @@
     };
 
     $scope.showMessage = function (type, title, message, closeCallback) {
-        
+
     };
 
     $scope.showSuccessMessage = function (title, message, closeCallback) {
@@ -29,4 +29,4 @@
 
 };
 
-window.$applicationModule.controller('rootController', ['$scope', 'crCommon', layoutController]);
+window.$applicationModule.controller('rootController', ['$scope', 'crCommon', rootController]);

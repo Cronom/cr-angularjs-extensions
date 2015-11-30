@@ -1,0 +1,52 @@
+﻿
+<!--<script type="text/ng-template" id="categoryTree">
+        {{ category.title }}
+        <ul ng-if="category.categories">
+            <li ng-repeat="category in category.categories" ng-include="'categoryTree'">           
+            </li>
+        </ul>
+</script>
+
+
+<ul>
+    <li ng-repeat="category in categories" ng-include="'categoryTree'"></li>
+</ul>-->
+
+<div class="btn-group cr-treelist">
+    <button ng-click="treeListModel.listVisible = !treeListModel.listVisible" type="button" class="btn btn-default {{treeListModel.buttonClass}}">
+        {{treeListModel.selectedItem.Title || treeListModel.placeholder || '-- Choose --'}}
+        <span class="caret"></span>
+    </button>
+
+    <div class="cr-treelist-container" ng-show="treeListModel.listVisible">
+        <ul style="list-style: none;">
+            <cr-treelist-item ng-repeat="item in treeListModel.data" item="item" on-selection="onSelection"></cr-treelist-item>
+        </ul>
+    </div>
+
+    <style>
+        div.cr-treelist {
+            position: relative;
+        }
+
+        div.cr-treelist-container {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            max-height: 300px;
+            height: 300px;
+            z-index: 99;
+            width: 300px;
+            overflow: hidden;
+            overflow-y: auto;
+            background: #FFF;
+            padding: 4px;
+            border: 1px solid #ddd;
+        }
+
+            div.cr-treelist-container ul {
+                padding-left: 10px;
+            }
+    </style>
+
+</div>

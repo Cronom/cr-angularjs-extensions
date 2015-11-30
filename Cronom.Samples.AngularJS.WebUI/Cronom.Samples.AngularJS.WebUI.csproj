@@ -117,6 +117,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\TreeListItemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -125,8 +126,11 @@
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\images\loading2.gif" />
     <Content Include="Content\scripts\application\sample-application.js" />
-    <Content Include="Content\scripts\application\home\home-controller.js" />
+    <Content Include="Content\scripts\application\treelistdrop\treelistdrop-controller.js" />
     <Content Include="Content\scripts\components\cr-common.js" />
+    <Content Include="Content\scripts\components\cr-treelist\cr-treelist-item.tmpl.html" />
+    <Content Include="Content\scripts\components\cr-treelist\cr-treelist.js" />
+    <Content Include="Content\scripts\components\cr-treelist\cr-treelist.tmpl.html" />
     <Content Include="Content\scripts\components\root-controller.js" />
     <Content Include="Content\scripts\libraries\angular.js" />
     <Content Include="Content\scripts\libraries\angular.min.js" />
@@ -143,7 +147,6 @@
     <Content Include="Content\styles\font-awesome.css" />
     <Content Include="Content\styles\font-awesome.min.css" />
     <Content Include="Content\styles\site.css" />
-    <Content Include="Content\styles\ui-grid.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -159,7 +162,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -185,6 +187,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\PageTreeListDrop.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

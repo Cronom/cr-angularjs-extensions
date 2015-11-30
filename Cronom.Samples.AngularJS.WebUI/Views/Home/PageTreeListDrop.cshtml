@@ -1,0 +1,25 @@
+﻿<div class="row" ng-controller="treelistdropController" ng-init="init()">
+
+    <h2>TreeList Drop</h2>
+
+    <div class="col-md-6">
+        <cr-treelist ng-model="treeListModel" on-selection="itemSelected"></cr-treelist>
+    </div>
+
+    <div class="col-md-6">
+        Selection: <br/>
+        <code>{{treeListModel.selectedItem|json}}</code>
+        <hr/>
+        Data:<br />
+        <code>{{treeListModel.data|json}}</code>
+    </div>
+
+</div>
+
+<!-- components to be used -->
+<script src="~/Content/scripts/components/cr-treelist/cr-treelist.js"></script>
+
+<!-- page controller -->
+<script src="~/Content/scripts/application/treelistdrop/treelistdrop-controller.js"></script>
+
+
