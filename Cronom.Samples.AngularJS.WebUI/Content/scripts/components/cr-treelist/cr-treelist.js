@@ -2,7 +2,7 @@
 
 model
 {
-    data                = []                    // treelist array [{ Id:'', Title:'', Children:[], Extra:{} }]
+    data                = []                    // treelist array [{ Id:'', Title:'', Children:[], Unselectable: false, Extra:{} }]
     selectAndExpand     = true|false            // selects and expands the parent node at the same time
     buttonClass         = ""                    // bootstrap button class
     placeholder         = ""                    // text to show when no item is selected
@@ -44,6 +44,15 @@ window.$applicationModule.directive('crTreelist', function () {
             //});
 
             $scope.itemOnClick = function (item) {
+
+                if ($scope.treeListModel.selectAndExpand) {
+                    $scope.expandCollapseOnClick(item);
+                }
+
+                if (item.Unselectable) {
+                    return;
+                }
+
                 $scope.selectionHash = item.$$hashKey;
                 $scope.treeListModel.selectedItem = item;
 
@@ -51,10 +60,6 @@ window.$applicationModule.directive('crTreelist', function () {
 
                 if (selectionCallback) {
                     selectionCallback(item);
-                }
-
-                if ($scope.treeListModel.selectAndExpand) {
-                    $scope.expandCollapseOnClick(item);
                 }
 
                 if ($scope.treeListModel.closeOnSelect && (!$scope.treeListModel.selectAndExpand || item.Children.length == 0)) {

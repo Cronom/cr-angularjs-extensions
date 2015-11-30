@@ -10,9 +10,14 @@
             $scope.treeListModel.placeholder = 'Select an item';
             $scope.treeListModel.buttonClass = 'btn-info';
             $scope.treeListModel.defaultItem = { Id: 'GR' };
-            $scope.treeListModel.selectAndExpand = true;
-            $scope.treeListModel.closeOnSelect = true;
+            $scope.treeListModel.selectAndExpand = false;
+            $scope.treeListModel.closeOnSelect = false;
             //$scope.treeListModel.useTextFilter = true;
+
+            $scope.treeListModel.data[0].Children[0].Extra= {'Culture':'en-gb','Tld':'.uk','Currency':'£'};
+            $scope.treeListModel.data[1].Unselectable = true;
+            $scope.treeListModel.data[1].Children[0].Unselectable = true;
+
             $scope.serializedOutput = JSON.stringify(response, '', 2);
         };
         crCommon.http.call(opts, success);
