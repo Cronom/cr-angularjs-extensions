@@ -3,14 +3,19 @@
     <h2>TreeList Drop</h2>
 
     <div class="col-md-6">
-        <cr-treelist ng-model="treeListModel" on-selection="itemSelected"></cr-treelist>
-    </div>
-
-    <div class="col-md-6">
+        Default: <code>{{treeListModel.defaultItem.Title}} - {{treeListModel.defaultItem.$$hashKey}}</code>
+        <br />
+        <pre>{{treeListModel.defaultItem|json}}</pre>
+        <hr />
         Selection: <code>{{treeListModel.selectedItem.Title}} - {{treeListModel.selectedItem.$$hashKey}}</code>
         <br />
         <pre>{{treeListModel.selectedItem|json}}</pre>
         <hr />
+        <cr-treelist ng-model="treeListModel" on-selection="itemSelected"></cr-treelist>
+    </div>
+
+    <div class="col-md-6">
+        
         Data:<br />
         <pre>{{serializedOutput}}</pre>
     </div>
