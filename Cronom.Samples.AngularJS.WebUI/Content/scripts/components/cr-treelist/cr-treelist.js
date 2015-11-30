@@ -7,6 +7,7 @@ model
     buttonClass         = ""                    // bootstrap button class
     placeholder         = ""                    // text to show when no item is selected
     onItemSelected      = function(item)        // item selection callback
+    closeOnSelect       = true|false            // closes list after selection
     -- useTextFilter    = true|false            // displays text filter
 }
 
@@ -54,6 +55,10 @@ window.$applicationModule.directive('crTreelist', function () {
 
                 if ($scope.treeListModel.selectAndExpand) {
                     $scope.expandCollapseOnClick(item);
+                }
+
+                if ($scope.treeListModel.closeOnSelect && (!$scope.treeListModel.selectAndExpand || item.Children.length == 0)) {
+                    $scope.treeListModel.listVisible = false;
                 }
             };
 

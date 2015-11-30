@@ -25,7 +25,7 @@
     <script type="text/ng-template" id="treeListItemTemplate">
         
         <span class="cr-treelist-item-container" ng-class="{ 'selected':selectionHash==item.$$hashKey }">
-            <span class="treelist-item-icon" ng-class="{ 'fa fa-plus-square': !item.expanded && item.Children.length>0, 'fa fa-minus-square': item.expanded }" ng-click="expandCollapseOnClick(item)"></span>&nbsp;
+            <span class="treelist-item-icon" ng-class="{ 'fa fa-plus-square': !item.expanded && item.Children.length>0, 'fa fa-minus-square': item.expanded }" ng-click="expandCollapseOnClick(item)"></span>
             <span class="treelist-item-title" ng-click="itemOnClick(item)" ng-class="{'unmatched-filter': matchHashes.indexOf(item.$$hashKey)==-1 && treeListModel.textFilter.length>0 && treeListModel.useTextFilter}">{{item.Title}}</span>
             <i ng-if="!treeListModel.initialSelected && treeListModel.defaultItem && treeListModel.defaultItem.Id === item.Id">
                 {{setItemPreselected(item)}}
