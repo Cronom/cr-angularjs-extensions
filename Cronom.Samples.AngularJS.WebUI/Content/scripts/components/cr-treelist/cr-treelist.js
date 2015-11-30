@@ -11,39 +11,28 @@
         },
         controller: function ($scope, $rootScope) {
             $rootScope.depth = 0;
-            $scope.treeListModel.selectedItem = $scope.defaultItem || {};
-            $scope.treeListModel.listVisible = false;
-            console.log('main-id = ' + $scope.$id);
-        }
-    };
-});
+            $scope.selectionHash = -1;
 
-window.$applicationModule.directive('crTreelistItem', function ($compile) {
-    return {
-        restrict: 'E',
-        templateUrl: '/Content/scripts/components/cr-treelist/cr-treelist-item.tmpl.html',
-        replace: true,
-        scope: {
-            item: '=',
-            onSelection: '='
-        },
-        link: function (scope, element, attrs) {
-            scope.$watch('item.Children', function () {
-                element.append($compile('<ul style="list-style:none;" ng-show="item.expanded"><cr-treelist-item ng-repeat="child in item.Children" item="child" on-selection="onSelection"></cr-treelist-item></ul>')(scope));
-            });
-        },
-        controller: function ($scope, $rootScope) {
-            console.log('item-id = ' + $scope.$id);
+            $scope.treeListModel.selectedItem = $scope.defaultItem || {};
 
             $scope.itemOnClick = function (item) {
-                item.selected = !item.selected;
-                if (item.Children.length > 0) {
-                    item.expanded = !item.expanded;
-                }
+                $scope.selectionHash = item.$$hashKey;
+
                 if ($scope.onSelection) {
                     $scope.onSelection(item);
                     $scope.treeListModel.selectedItem = item;
                 }
+            };
+
+            $scope.expandCollapseOnClick = function (item) {
+                if (item.Children.length > 0) {
+                    item.expanded = !item.expanded;
+                }
+            };
+
+            $scope.removeSelection = function () {
+                $scope.treeListModel.selectedItem = $scope.defaultItem || {};
+                $scope.selectionHash = -1;
             };
         }
     };

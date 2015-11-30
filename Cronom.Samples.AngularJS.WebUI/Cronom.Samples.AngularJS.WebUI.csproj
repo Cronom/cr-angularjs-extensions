@@ -128,7 +128,6 @@
     <Content Include="Content\scripts\application\sample-application.js" />
     <Content Include="Content\scripts\application\treelistdrop\treelistdrop-controller.js" />
     <Content Include="Content\scripts\components\cr-common.js" />
-    <Content Include="Content\scripts\components\cr-treelist\cr-treelist-item.tmpl.html" />
     <Content Include="Content\scripts\components\cr-treelist\cr-treelist.js" />
     <Content Include="Content\scripts\components\cr-treelist\cr-treelist.tmpl.html" />
     <Content Include="Content\scripts\components\root-controller.js" />

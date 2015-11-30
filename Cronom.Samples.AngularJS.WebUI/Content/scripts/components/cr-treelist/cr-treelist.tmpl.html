@@ -1,52 +1,90 @@
-﻿
-<!--<script type="text/ng-template" id="categoryTree">
-        {{ category.title }}
-        <ul ng-if="category.categories">
-            <li ng-repeat="category in category.categories" ng-include="'categoryTree'">           
-            </li>
-        </ul>
-</script>
+﻿<div class="btn-group cr-treelist">
 
-
-<ul>
-    <li ng-repeat="category in categories" ng-include="'categoryTree'"></li>
-</ul>-->
-
-<div class="btn-group cr-treelist">
-    <button ng-click="treeListModel.listVisible = !treeListModel.listVisible" type="button" class="btn btn-default {{treeListModel.buttonClass}}">
-        {{treeListModel.selectedItem.Title || treeListModel.placeholder || '-- Choose --'}}
-        <span class="caret"></span>
-    </button>
+    <div class="input-group">
+        <button ng-click="treeListModel.listVisible = !treeListModel.listVisible" type="button" class="btn btn-default {{treeListModel.buttonClass}}">
+            {{treeListModel.selectedItem.Title || treeListModel.placeholder || '-- Choose --'}}
+            <span class="fa fa-caret-down"></span>
+        </button>
+        <span ng-click="removeSelection()" class="input-group-addon btn"><i class="fa fa-remove"></i></span>
+    </div>
 
     <div class="cr-treelist-container" ng-show="treeListModel.listVisible">
         <ul style="list-style: none;">
-            <cr-treelist-item ng-repeat="item in treeListModel.data" item="item" on-selection="onSelection"></cr-treelist-item>
+            <li ng-repeat="item in treeListModel.data" ng-include="'treeListItemTemplate'"></li>
         </ul>
     </div>
+
+    <script type="text/ng-template" id="treeListItemTemplate">
+        
+        <span class="cr-treelist-item-container" ng-class="{ 'selected':selectionHash==item.$$hashKey }">
+            <span ng-class="{ 'fa fa-plus-square': !item.expanded && item.Children.length>0, 'fa fa-minus-square': item.expanded }" ng-click="expandCollapseOnClick(item)"></span>&nbsp;
+            <span ng-click="itemOnClick(item)">{{item.Title}}</span>
+        </span>
+        
+        <ul ng-if="item.Children" ng-show="item.expanded">
+            <li ng-repeat="item in item.Children" ng-include="'treeListItemTemplate'"></li>
+        </ul>
+    </script>
 
     <style>
         div.cr-treelist {
             position: relative;
         }
 
-        div.cr-treelist-container {
-            position: absolute;
-            top: 40px;
-            left: 0;
-            max-height: 300px;
-            height: 300px;
-            z-index: 99;
-            width: 300px;
-            overflow: hidden;
-            overflow-y: auto;
-            background: #FFF;
-            padding: 4px;
-            border: 1px solid #ddd;
-        }
-
-            div.cr-treelist-container ul {
-                padding-left: 10px;
+            div.cr-treelist button {
+                width: 100%;
+                text-align: left;
+                outline: none;
+                position: relative;
             }
-    </style>
 
+                div.cr-treelist button:focus, div.cr-treelist button:active {
+                    outline: none;
+                }
+
+                div.cr-treelist button span.fa-caret-down {
+                    position: absolute;
+                    right: 10px;
+                    top: 10px;
+                }
+
+            div.cr-treelist div.cr-treelist-container {
+                position: absolute;
+                top: 34px;
+                left: 0;
+                max-height: 300px;
+                height: 300px;
+                z-index: 99;
+                width: 100%;
+                overflow: hidden;
+                overflow-y: auto;
+                background: #FFF;
+                padding: 4px;
+                border: 1px solid #ddd;
+            }
+
+                div.cr-treelist div.cr-treelist-container ul {
+                    list-style: none;
+                    padding-left: 10px;
+                }
+
+                    div.cr-treelist div.cr-treelist-container ul li {
+                        width: 100%;
+                    }
+
+                        div.cr-treelist div.cr-treelist-container ul li span.cr-treelist-item-container {
+                            width: 100%;
+                            display: inline-block;
+                            padding: 4px;
+                        }
+
+                            div.cr-treelist div.cr-treelist-container ul li span.cr-treelist-item-container:hover {
+                                background-color: #ddd;
+                                cursor: pointer;
+                            }
+
+                            div.cr-treelist div.cr-treelist-container ul li span.cr-treelist-item-container.selected {
+                                background-color: #d8d8d8;
+                            }
+    </style>
 </div>
