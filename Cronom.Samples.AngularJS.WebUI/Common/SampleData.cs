@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using Cronom.Samples.AngularJS.WebUI.Models;
 
 namespace Cronom.Samples.AngularJS.WebUI.Common
@@ -65,6 +67,17 @@ namespace Cronom.Samples.AngularJS.WebUI.Common
 
 
             return data;
+        }
+
+        public static List<ListItemModel> CountriesAsList()
+        {
+            var list = new List<ListItemModel>();
+            var tree = CountriesAsTreeList();
+            foreach (var parent in tree)
+            {
+                list.AddRange(parent.Children.Select(c => new ListItemModel { Id = c.Id, Title = c.Title }));
+            }
+            return list;
         }
 
         public static List<TreeListItemModel> RandomTreeList()

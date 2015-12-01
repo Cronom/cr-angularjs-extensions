@@ -118,6 +118,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ListItemModel.cs" />
     <Compile Include="Models\TreeListItemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -126,8 +127,11 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\images\loading2.gif" />
+    <Content Include="Content\scripts\application\autocomplete\autocomplete-page-controller.js" />
     <Content Include="Content\scripts\application\sample-application.js" />
     <Content Include="Content\scripts\application\treelistdrop\treelistdrop-page-controller.js" />
+    <Content Include="Content\scripts\components\cr-autocomplete\cr-autocomplete.js" />
+    <Content Include="Content\scripts\components\cr-autocomplete\cr-autocomplete.tmpl.html" />
     <Content Include="Content\scripts\components\cr-common.js" />
     <Content Include="Content\scripts\components\cr-treelist\cr-treelist.js" />
     <Content Include="Content\scripts\components\cr-treelist\cr-treelist.tmpl.html" />
@@ -190,6 +194,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\PageTreeListDrop.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\PageAutocomplete.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

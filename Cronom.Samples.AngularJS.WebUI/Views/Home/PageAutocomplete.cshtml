@@ -1,0 +1,31 @@
+﻿<div class="row" ng-controller="autocompletePageController" ng-init="init()">
+
+    <h2>Autocomplete Text</h2>
+
+    <div class="col-md-6">
+        <cr-autocomplete ng-model="autocompleteModel" on-selection="itemSelected"></cr-autocomplete>
+        <hr />
+
+        <div class="alert alert-success">
+            Selection: <code>{{autocompleteModel.selectedItem.Title}} - {{autocompleteModel.selectedItem.$$hashKey}}</code><br />
+            <pre>{{autocompleteModel.selectedItem|json}}</pre>
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+        <div class="alert alert-info">
+            Data:<br />
+            <pre>{{serializedOutput}}</pre>
+        </div>
+    </div>
+
+</div>
+
+<!-- components to be used -->
+<script src="~/Content/scripts/components/cr-autocomplete/cr-autocomplete.js"></script>
+
+<!-- page controller -->
+<script src="~/Content/scripts/application/autocomplete/autocomplete-page-controller.js"></script>
+
+

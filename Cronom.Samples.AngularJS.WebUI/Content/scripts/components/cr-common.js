@@ -40,6 +40,9 @@ window.$applicationModule.factory('crCommon', function ($http, $q) {
             }
         };
 
+        //console.debug('http.call');
+        //console.debug(options);
+
         var requestPromise;
         if ('POST' == options.method) {
             requestPromise = $http.post(options.api, options.data, config);

@@ -1,0 +1,59 @@
+﻿<div class="cr-autocomplete">
+
+    <div class="input-group">
+        <input type="text" ng-model="autocompleteModel.inputText" class="form-control" placeholder="{{autocompleteModel.placeholder || 'Enter a keyword...'}}">
+        <span class="input-group-addon" ng-show="isLoading"><i class="fa fa-refresh"></i></span>
+    </div>
+
+    <div class="cr-autocomplete-result-wrapper" ng-show="didRequestCompleted()">
+
+        <div class="well-sm alert-warning" ng-show="hasEmptyResult()">
+            <i class="fa fa-remove"></i>No results to display
+        </div>
+
+        <div class="cr-autocomplete-result-container" ng-show="hasSearchResult()">
+            <p class="tooltip alert-info">Select an item from below.</p>
+
+            <ul style="list-style: none;">
+                <li ng-repeat="item in autocompleteModel.data track by $index" ng-mouseenter="selectActive(item,$index)">
+                    <span ng-click="itemOnClick(item,$index)" data-index="$index" data-item="item" data-query="autocompleteModel.inputText">{{item.Title}}</span>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <style>
+        div.cr-autocomplete {
+            position: relative;
+            user-select: none;
+            -moz-user-select: none;
+            -o-user-select: none;
+            -webkit-user-select: none;
+        }
+
+            div.cr-autocomplete div.cr-autocomplete-container {
+                position: absolute;
+                top: 34px;
+                left: 0;
+                max-height: 300px;
+                height: auto;
+                z-index: 99;
+                width: 100%;
+                overflow: hidden;
+                overflow-y: auto;
+                background: #EAEAEA;
+                padding: 4px;
+                border: 1px solid #ddd;
+            }
+
+                div.cr-autocomplete div.cr-autocomplete-container ul {
+                    list-style: none;
+                    padding-left: 10px;
+                }
+
+                    div.cr-autocomplete div.cr-autocomplete-container ul li {
+                        width: 100%;
+                    }
+    </style>
+</div>
