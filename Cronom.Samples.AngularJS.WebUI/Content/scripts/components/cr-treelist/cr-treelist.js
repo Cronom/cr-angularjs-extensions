@@ -14,7 +14,7 @@ model
 */
 
 
-window.$applicationModule.directive('crTreelist', function () {
+var crTreelist = function () {
     return {
         restrict: 'E',
         templateUrl: '/Content/scripts/components/cr-treelist/cr-treelist.tmpl.html',
@@ -77,8 +77,7 @@ window.$applicationModule.directive('crTreelist', function () {
                 $scope.treeListModel.selectedItem = $scope.treeListModel.defaultItem || {};
                 if ($scope.treeListModel.selectedItem && $scope.treeListModel.selectedItem.$$hashKey) {
                     $scope.selectionHash = $scope.treeListModel.selectedItem.$$hashKey;
-                }
-                else {
+                } else {
                     $scope.selectionHash = -1;
                 }
             };
@@ -119,4 +118,6 @@ window.$applicationModule.directive('crTreelist', function () {
             };
         }
     };
-});
+};
+
+window.$applicationModule.directive('crTreelist', crTreelist);
