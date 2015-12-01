@@ -4,16 +4,16 @@
 
     <div class="col-md-6">
         <cr-autocomplete ng-model="autocompleteModel" on-selection="itemSelected"></cr-autocomplete>
-        <hr />
-
-        <div class="alert alert-success">
-            Selection: <code>{{autocompleteModel.selectedItem.Title}} - {{autocompleteModel.selectedItem.$$hashKey}}</code><br />
-            <pre>{{autocompleteModel.selectedItem|json}}</pre>
-        </div>
-
     </div>
 
     <div class="col-md-6">
+        <div class="alert alert-success">
+            Selection: <code>{{autocompleteModel.selectedItem.Title}} - {{autocompleteModel.selectedItem.Id}}</code><br />
+            <pre>{{autocompleteModel.selectedItem|json}}</pre>
+        </div>
+
+        <hr />
+
         <div class="alert alert-info">
             Data:<br />
             <pre>{{serializedOutput}}</pre>
