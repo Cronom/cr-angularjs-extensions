@@ -11,27 +11,34 @@
             FormData:<br />
             <pre>{{formModel.viewData|json}}</pre>
         </div>
-        <div class="">
-            <table class="table">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Name: {{formModel.name}}</th>
+                </tr>
+                <tr>
+                    <th>Action: {{actionResult}}</th>
+                </tr>
+                <tr>
+                    <td ng-class="{ success: formModel.form.$valid, danger: formModel.form.$invalid }">Valid</td>
+                </tr>
+                <tr>
+                    <td ng-class="{ success: formModel.form.$pristine, danger: !formModel.form.$pristine }">Pristine</td>
+                </tr>
+                <tr>
+                    <td ng-class="{ success: formModel.form.$dirty }">Dirty</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <table class="table">
                 <tbody>
                     <tr>
-                        <th>Name: {{formModel.name}}</th>
-                    </tr>
-                    <tr>
-                        <th>Action: {{actionResult}}</th>
-                    </tr>
-                    <tr>
-                        <td ng-class="{ success: formModel.form.$valid, danger: formModel.form.$invalid }">Valid</td>
-                    </tr>
-                    <tr>
-                        <td ng-class="{ success: formModel.form.$pristine, danger: !formModel.form.$pristine }">Pristine</td>
-                    </tr>
-                    <tr>
-                        <td ng-class="{ success: formModel.form.$dirty }">Dirty</td>
+                        <td ng-repeat="field in formModel.fields" ng-class="{ success: formModel.viewModel[field].isValid, danger: !formModel.viewModel[field].isValid }">{{field}}</td>
                     </tr>
                 </tbody>
             </table>
-        </div>
+
     </div>
 </div>
 

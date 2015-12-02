@@ -14,6 +14,7 @@ ngModel definition
                required     : true|false                                // true if the input is required
                errorMessage : ''                                        // error message to be deisplayed if invalid or required
                placeholder  : ''                                        // placeholder text for the input field
+               rule         : ''                                        // angularjs expressions to evaluate on validation
             }
     }
     submitLabel : 'Submit'                                              // form submit button label
@@ -44,8 +45,28 @@ var crForm = function () {
                 }
             });
 
-            $scope.hasError = function (key) {
-                return $scope.formModel.form[key].$invalid && !$scope.formModel.form[key].$pristine;
+            $scope.hasError = function (field) {
+                var isValidExpression = $scope.evaluateFormRule(field);
+                var isNotvalid = $scope.formModel.form[field].$invalid && !$scope.formModel.form[field].$pristine;
+                var hasError = !isValidExpression || isNotvalid;
+                $scope.formModel.viewModel[field].isValid = !hasError;
+                return hasError;
+            };
+
+            $scope.evaluateFormRule = function (field) {
+                var rule = $scope.formModel.viewModel[field].rule;
+                if (rule && $scope.formModel.viewData[field] && $scope.formModel.viewData[field].length > 0) {
+                    // --- to use with form element ---
+                    // var find = $scope.formModel.name + '.';
+                    // var regex = new RegExp(find, 'g');
+                    // var expression = rule.replace(regex, 'formModel.form.');
+
+                    var find = $scope.formModel.name + '.';
+                    var regex = new RegExp(find, 'g');
+                    var expression = rule.replace(regex, 'formModel.viewData.');
+                    return $scope.$eval(expression);
+                }
+                return true;
             };
 
             $scope.isFormInvalid = function () {

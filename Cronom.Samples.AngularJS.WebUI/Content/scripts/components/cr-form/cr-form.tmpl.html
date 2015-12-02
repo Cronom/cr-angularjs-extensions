@@ -7,7 +7,7 @@
         <div ng-repeat="field in formModel.fields" class="form-group" ng-class="{ 'has-error' : hasError(field) }">
             <label for="{{field}}">{{formModel.viewModel[field].label}}</label>
             <input type="{{formModel.viewModel[field].type}}" name="{{field}}" placeholder="{{formModel.viewModel[field].placeholder}}" class="form-control" ng-model="formModel.viewData[field]" ng-required="formModel.viewModel[field].required">
-            <p ng-if="formModel.viewModel[field].required" ng-show="hasError(field)" class="help-block">{{formModel.viewModel[field].errorMessage}}</p>
+            <p ng-if="formModel.viewModel[field].required || formModel.viewModel[field].rule" ng-show="hasError(field)" class="help-block">{{formModel.viewModel[field].errorMessage}}</p>
         </div>
 
         <button type="submit" class="btn btn-primary" ng-disabled="isFormInvalid()"><i ng-if="formModel.submitIcon" class="fa {{formModel.submitIcon}}">&nbsp;</i>{{formModel.submitLabel || 'Submit'}}</button>
