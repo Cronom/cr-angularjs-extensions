@@ -1,0 +1,18 @@
+﻿<div class="cr-form {{formModel.cssClass}}">
+
+    <h3 ng-if="formModel.title"><i ng-if="formModel.icon" class="fa {{formModel.icon}}">&nbsp;</i>{{formModel.title}}</h3>
+    <br />
+    <form name="{{formModel.name}}" ng-submit="submitForm()" novalidate>
+
+        <div ng-repeat="field in formModel.fields" class="form-group" ng-class="{ 'has-error' : hasError(field) }">
+            <label for="{{field}}">{{formModel.viewModel[field].label}}</label>
+            <input type="{{formModel.viewModel[field].type}}" name="{{field}}" placeholder="{{formModel.viewModel[field].placeholder}}" class="form-control" ng-model="formModel.viewData[field]" ng-required="formModel.viewModel[field].required">
+            <p ng-if="formModel.viewModel[field].required" ng-show="hasError(field)" class="help-block">{{formModel.viewModel[field].errorMessage}}</p>
+        </div>
+
+        <button type="submit" class="btn btn-primary" ng-disabled="isFormInvalid()"><i ng-if="formModel.submitIcon" class="fa {{formModel.submitIcon}}">&nbsp;</i>{{formModel.submitLabel || 'Submit'}}</button>
+        <button ng-if="formModel.canReset" type="button" class="btn btn-warning" ng-click="resetForm()"><i ng-if="formModel.resetIcon" class="fa {{formModel.resetIcon}}">&nbsp;</i>{{formModel.resetLabel || 'Reset'}}</button>
+
+    </form>
+
+</div>

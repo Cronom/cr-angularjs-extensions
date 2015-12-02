@@ -41,5 +41,10 @@ namespace Cronom.Samples.AngularJS.WebUI.Controllers
             var data = SampleData.CountriesAsList().FindAll(c => c.Title.ToLowerInvariant().Contains(keyword.ToLowerInvariant()));
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult PageForm()
+        {
+            return View();
+        }
     }
 }

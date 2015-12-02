@@ -1,0 +1,50 @@
+﻿<div class="row" ng-controller="formPageController" ng-init="init()">
+
+    <h2>Form</h2>
+
+    <div class="col-md-6">
+        <cr-form ng-model="formModel"></cr-form>
+    </div>
+
+    <div class="col-md-6">
+        <div class="alert alert-info">
+            FormData:<br />
+            <pre>{{formModel.viewData|json}}</pre>
+        </div>
+        <div class="">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Name: {{formModel.name}}</th>
+                    </tr>
+                    <tr>
+                        <th>Action: {{actionResult}}</th>
+                    </tr>
+                    <tr>
+                        <td ng-class="{ success: formModel.form.$valid, danger: formModel.form.$invalid }">Valid</td>
+                    </tr>
+                    <tr>
+                        <td ng-class="{ success: formModel.form.$pristine, danger: !formModel.form.$pristine }">Pristine</td>
+                    </tr>
+                    <tr>
+                        <td ng-class="{ success: formModel.form.$dirty }">Dirty</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- components to be used -->
+<script src="~/Content/scripts/components/cr-form/cr-form.js"></script>
+
+<!-- page controller -->
+<script src="~/Content/scripts/application/form/form-page-controller.js"></script>
+
+<!-- sample style -->
+<style>
+    .register-form {
+        padding: 6px;
+        border: 1px solid #ddd;
+    }
+</style>
