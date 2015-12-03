@@ -45,11 +45,20 @@ var crForm = function () {
                 }
             });
 
+            $scope.$watch('formModel.viewModel', function () {
+                for (var i = 0; i < $scope.formModel.fields.length; i++) {
+                    $scope.hasError($scope.formModel.fields[i]);
+                }
+            });
+
             $scope.hasError = function (field) {
-                var isValidExpression = $scope.evaluateFormRule(field);
+                var isExpressionValid = $scope.evaluateFormRule(field);
                 var isNotvalid = $scope.formModel.form[field].$invalid && !$scope.formModel.form[field].$pristine;
-                var hasError = !isValidExpression || isNotvalid;
-                $scope.formModel.viewModel[field].isValid = !hasError;
+                var hasError = !isExpressionValid || isNotvalid;
+                $scope.formModel.viewModel[field].isValid = !isNotvalid;
+                $scope.formModel.viewModel[field].isExpressionValid = isExpressionValid;
+                $scope.formModel.viewModel[field].isPristine = $scope.formModel.form[field].$pristine;
+                $scope.formModel.viewModel[field].isDirty = $scope.formModel.form[field].$dirty;
                 return hasError;
             };
 
@@ -88,6 +97,7 @@ var crForm = function () {
                 if ($scope.formModel.resetForm) {
                     $scope.formModel.resetForm();
                 }
+                $scope.formModel.viewModel._reset = true;
             };
 
             $scope.resetForm();

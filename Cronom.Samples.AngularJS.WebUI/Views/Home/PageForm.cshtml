@@ -12,32 +12,39 @@
             <pre>{{formModel.viewData|json}}</pre>
         </div>
         <table class="table">
-            <tbody>
-                <tr>
-                    <th>Name: {{formModel.name}}</th>
-                </tr>
-                <tr>
-                    <th>Action: {{actionResult}}</th>
-                </tr>
-                <tr>
-                    <td ng-class="{ success: formModel.form.$valid, danger: formModel.form.$invalid }">Valid</td>
-                </tr>
-                <tr>
-                    <td ng-class="{ success: formModel.form.$pristine, danger: !formModel.form.$pristine }">Pristine</td>
-                </tr>
-                <tr>
-                    <td ng-class="{ success: formModel.form.$dirty }">Dirty</td>
-                </tr>
-            </tbody>
+            <tr>
+                <th>Name: {{formModel.name}}</th>
+            </tr>
+            <tr>
+                <th>Action: {{actionResult}}</th>
+            </tr>
+            <tr>
+                <td ng-class="{ success: formModel.form.$valid, danger: formModel.form.$invalid }">Valid</td>
+            </tr>
+            <tr>
+                <td ng-class="{ success: formModel.form.$pristine, danger: !formModel.form.$pristine }">Pristine</td>
+            </tr>
+            <tr>
+                <td ng-class="{ success: formModel.form.$dirty }">Dirty</td>
+            </tr>
         </table>
-        
+
         <table class="table">
-                <tbody>
-                    <tr>
-                        <td ng-repeat="field in formModel.fields" ng-class="{ success: formModel.viewModel[field].isValid, danger: !formModel.viewModel[field].isValid }">{{field}}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <tr>
+                <th>field</th>
+                <th>isExpressionValid</th>
+                <th>isPristine</th>
+                <th>isDirty</th>
+                <th>isValid</th>
+            </tr>
+            <tr ng-repeat="field in formModel.fields" class=" text-center">
+                <td class="text-left">{{field}}</td>
+                <td ng-class="{ success: formModel.viewModel[field].isExpressionValid, danger: !formModel.viewModel[field].isExpressionValid }">{{formModel.viewModel[field].isExpressionValid}}</td>
+                <td ng-class="{ success: formModel.viewModel[field].isPristine, danger: !formModel.viewModel[field].isPristine }">{{formModel.viewModel[field].isPristine}}</td>
+                <td ng-class="{ success: formModel.viewModel[field].isDirty, danger: !formModel.viewModel[field].isDirty }">{{formModel.viewModel[field].isDirty}}</td>
+                <td ng-class="{ success: formModel.viewModel[field].isValid, danger: !formModel.viewModel[field].isValid }">{{formModel.viewModel[field].isValid}}</td>
+            </tr>
+        </table>
 
     </div>
 </div>
