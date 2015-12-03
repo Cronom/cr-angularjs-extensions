@@ -4,15 +4,34 @@
     <br />
     <form name="{{formModel.name}}" ng-submit="submitForm()" novalidate>
 
-        <div ng-repeat="field in formModel.fields" class="form-group" ng-class="{ 'has-error' : hasError(field) }">
-            <label for="{{field}}">{{formModel.viewModel[field].label}}</label>
-            <input type="{{formModel.viewModel[field].type}}" name="{{field}}" placeholder="{{formModel.viewModel[field].placeholder}}" class="form-control" ng-model="formModel.viewData[field]" ng-required="formModel.viewModel[field].required">
-            <p ng-if="formModel.viewModel[field].required || formModel.viewModel[field].rule" ng-show="hasError(field)" class="help-block">{{formModel.viewModel[field].errorMessage}}</p>
-        </div>
+        <div ng-repeat="field in formModel.fields" class="form-group" ng-class="{ 'has-error' : hasError(field) }" ng-include="getFieldInputTemplate(field)"></div>
 
         <button type="submit" class="btn btn-primary" ng-disabled="isFormInvalid()"><i ng-if="formModel.submitIcon" class="fa {{formModel.submitIcon}}">&nbsp;</i>{{formModel.submitLabel || 'Submit'}}</button>
         <button ng-if="formModel.canReset" type="button" class="btn btn-warning" ng-click="resetForm()"><i ng-if="formModel.resetIcon" class="fa {{formModel.resetIcon}}">&nbsp;</i>{{formModel.resetLabel || 'Reset'}}</button>
 
     </form>
 
+    <script type="text/ng-template" id="input_generic_template">
+        <label for="{{field}}">{{formModel.viewModel[field].label}}</label>
+        <input type="{{formModel.viewModel[field].type}}" name="{{field}}" placeholder="{{formModel.viewModel[field].placeholder}}" class="form-control" ng-model="formModel.viewData[field]" ng-required="formModel.viewModel[field].required">
+        <p ng-if="formModel.viewModel[field].required || formModel.viewModel[field].rule" ng-show="hasError(field)" class="help-block">{{formModel.viewModel[field].errorMessage}}</p>
+    </script>
+
+    <script type="text/ng-template" id="input_checkbox_template">
+        <div ng-if="formModel.viewModel[field].type=='checkbox'" class="checkbox">
+            <label>
+                <input type="{{formModel.viewModel[field].type}}" name="{{field}}" ng-model="formModel.viewData[field]" ng-required="formModel.viewModel[field].required">
+                {{formModel.viewModel[field].label}}
+            </label>
+        </div>
+        <p ng-if="formModel.viewModel[field].required || formModel.viewModel[field].rule" ng-show="hasError(field)" class="help-block">{{formModel.viewModel[field].errorMessage}}</p>
+    </script>
+
+    <script type="text/ng-template" id="input_select_template">
+        <label for="{{field}}">{{formModel.viewModel[field].label}}</label>
+        <select class="form-control" name="{{field}}" ng-options="option as option.text for option in formModel.viewModel[field].options track by option.value" ng-model="formModel.viewData[field]"></select>
+        <p ng-if="formModel.viewModel[field].required || formModel.viewModel[field].rule" ng-show="hasError(field)" class="help-block">{{formModel.viewModel[field].errorMessage}}</p>
+    </script>
+
 </div>
+

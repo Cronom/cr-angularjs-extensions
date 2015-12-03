@@ -9,12 +9,13 @@ ngModel definition
     fields      : []                                                    // array of field names
     viewModel   : {                                                     // viewModel of the form
             propertyName : {                                            // each field must be defined as property 
-               type         : 'email'|'text'|'number'|'password'        // html input[type] values 
+               type         : 'email'|'text'|'number'|'password'|...    // html input or element type values (email,date,text,checkbox,number,password,select etc.)
                label        : ''                                        // label to be displayed in form field
                required     : true|false                                // true if the input is required
                errorMessage : ''                                        // error message to be deisplayed if invalid or required
                placeholder  : ''                                        // placeholder text for the input field
                rule         : ''                                        // angularjs expressions to evaluate on validation
+               options      : [{text:'', value:''}]                     // if input type is select, provided options will be displayed
             }
     }
     submitLabel : 'Submit'                                              // form submit button label
@@ -39,6 +40,22 @@ var crForm = function () {
         },
         controller: function ($scope) {
 
+            $scope.renderType = {
+                'text': 'input_generic_template',
+                'number': 'input_generic_template',
+                'email': 'input_generic_template',
+                'password': 'input_generic_template',
+                'date': 'input_generic_template',
+                'datetime': 'input_generic_template',
+                'checkbox': 'input_checkbox_template',
+                'select': 'input_select_template'
+            };
+
+            $scope.getFieldInputTemplate = function (field) {
+                var type = $scope.formModel.viewModel[field].type;
+                return $scope.renderType[type];
+            };
+
             $scope.$watch($scope.formModel.name, function (form) {
                 if (form) {
                     $scope.formModel.form = form;
@@ -52,6 +69,10 @@ var crForm = function () {
             });
 
             $scope.hasError = function (field) {
+                if (!$scope.formModel.form[field]) {
+                    console.log('$scope.formModel.form[' + field + '] undefined');
+                    return false;
+                }
                 var isExpressionValid = $scope.evaluateFormRule(field);
                 var isNotvalid = $scope.formModel.form[field].$invalid && !$scope.formModel.form[field].$pristine;
                 var hasError = !isExpressionValid || isNotvalid;
