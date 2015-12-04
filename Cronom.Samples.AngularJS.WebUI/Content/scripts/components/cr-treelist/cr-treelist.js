@@ -9,6 +9,8 @@ model
     onItemSelected      = function(item)        // item selection callback
     closeOnSelect       = true|false            // closes list after selection
     -- useTextFilter    = true|false            // displays text filter
+    includeChildren     = true|false            // if true, includes the Children:[] array on selected item
+    onDataSourceLoaded  = function(data)        // callback for dataSource loaded event
 }
 
 */
@@ -59,11 +61,17 @@ var crTreelist = function (crCommon) {
 
             $scope.loadLocal = function () {
                 $scope.treeListModel.data = $scope.treeListModel.dataSource;
+                if ($scope.treeListModel.onDataSourceLoaded) {
+                    $scope.treeListModel.onDataSourceLoaded($scope.treeListModel.dataSource);
+                }
             };
 
             $scope.loadRemote = function () {
                 var onSuccess = function (response) {
                     $scope.treeListModel.data = response;
+                    if ($scope.treeListModel.onDataSourceLoaded) {
+                        $scope.treeListModel.onDataSourceLoaded($scope.treeListModel.data);
+                    }
                 }
                 crCommon.http.call({ api: $scope.treeListModel.dataSource, method: 'POST' }, onSuccess);
             };
@@ -78,13 +86,18 @@ var crTreelist = function (crCommon) {
                     return;
                 }
 
+                var tempItem = angular.copy(item);
+                if (!$scope.treeListModel.includeChildren && tempItem.Children) {
+                    delete tempItem.Children;
+                }
+
                 $scope.selectionHash = item.$$hashKey;
-                $scope.treeListModel.selectedItem = item;
+                $scope.treeListModel.selectedItem = tempItem;
 
                 var selectionCallback = $scope.onSelection || $scope.treeListModel.onItemSelected;
 
                 if (selectionCallback) {
-                    selectionCallback(item, undefined, $scope.parentFieldName);
+                    selectionCallback(tempItem, undefined, $scope.parentFieldName);
                 }
 
                 if ($scope.treeListModel.closeOnSelect && (!$scope.treeListModel.selectAndExpand || item.Children.length == 0)) {
