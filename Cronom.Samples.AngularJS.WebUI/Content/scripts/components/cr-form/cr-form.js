@@ -123,7 +123,7 @@ var crForm = function () {
                 $scope.formModel.viewModel._reset = true;
             };
 
-            $scope.wrappedComponent_ItemSelection = function (selection, index, fieldName) {
+            $scope.wrappedComponentItemSelection = function (selection, index, fieldName) {
                 $scope.formModel.viewData[fieldName] = selection;
             };
 

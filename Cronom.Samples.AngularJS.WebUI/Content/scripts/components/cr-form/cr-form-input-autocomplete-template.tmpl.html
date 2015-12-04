@@ -1,3 +1,3 @@
 ﻿<label for="{{field}}">{{formModel.viewModel[field].label}}</label>
-<cr-autocomplete ng-model="formModel.viewModel[field]" on-selection="autocompleteSelection" parent-field-name="field"></cr-autocomplete>
+<cr-autocomplete ng-model="formModel.viewModel[field]" on-selection="wrappedComponentItemSelection" parent-field-name="field"></cr-autocomplete>
 <p ng-if="formModel.viewModel[field].required || formModel.viewModel[field].rule" ng-show="hasError(field)" class="help-block">{{formModel.viewModel[field].errorMessage}}</p>
