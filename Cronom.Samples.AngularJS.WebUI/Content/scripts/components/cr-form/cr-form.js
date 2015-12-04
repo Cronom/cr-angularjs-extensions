@@ -50,7 +50,8 @@ var crForm = function () {
                 'datetime': '/Content/scripts/components/cr-form/cr-form-input-generic-template.tmpl.html',
                 'checkbox': '/Content/scripts/components/cr-form/cr-form-input-checkbox-template.tmpl.html',
                 'select': '/Content/scripts/components/cr-form/cr-form-input-select-template.tmpl.html',
-                'autocomplete': '/Content/scripts/components/cr-form/cr-form-input-autocomplete-template.tmpl.html'
+                'autocomplete': '/Content/scripts/components/cr-form/cr-form-input-autocomplete-template.tmpl.html',
+                'treelist': '/Content/scripts/components/cr-form/cr-form-input-treelist-template.tmpl.html',
             };
 
             $scope.getFieldInputTemplate = function (field) {

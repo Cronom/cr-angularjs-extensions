@@ -5,7 +5,7 @@
         title: 'New User Registration',
         icon: 'fa-user',
         cssClass: 'register-form',
-        fields: ['name', 'surname', 'bandwidth', 'birthday', 'email', 'password', 'passwordRepeat', 'favoredTextEditor', 'acceptTos'],
+        fields: ['name', 'surname','country', 'birthday', 'email', 'password', 'passwordRepeat', 'bandwidth', 'favoredTextEditor', 'acceptTos'],
         viewModel: {
             name: { label: 'Firstname', required: true, errorMessage: 'Please provide a valid firstname', type: 'text' },
             surname: { label: 'Lastname', required: true, errorMessage: 'Please provide a valid lastname', type: 'text' },
@@ -24,6 +24,16 @@
                     { text: 'T1', value: 't1' }, { text: 'T2', value: 't2' }, { text: 'T3', value: 't3' },
                     { text: '3G', value: '3G' }, { text: '4G', value: '4G' }, { text: '4.5G', value: '4.5G' }
                 ]
+            },
+            country: {
+                rule: 'registerForm.country',
+                label: 'Country/Region',
+                errorMessage: 'Please type your country',
+                type: 'treelist',
+                dataSource : './GetPageTreeListData',
+                minimumInput: 2,
+                placeholder: 'Select Country/Region',
+                buttonClass : 'btn-default'
             },
             favoredTextEditor: {
                 rule: 'registerForm.favoredTextEditor',
