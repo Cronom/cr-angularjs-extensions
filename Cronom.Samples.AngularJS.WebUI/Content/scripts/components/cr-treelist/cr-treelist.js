@@ -2,7 +2,7 @@
 
 model
 {
-    data                = []                    // treelist array [{ Id:'', Title:'', Children:[], Unselectable: false, Extra:{} }]
+    dataSource          = "" | []               // url or treelist array [{ Id:'', Title:'', Children:[], Unselectable: false, Extra:{} }]    
     selectAndExpand     = true|false            // selects and expands the parent node at the same time
     buttonClass         = ""                    // bootstrap button class
     placeholder         = ""                    // text to show when no item is selected
@@ -14,7 +14,7 @@ model
 */
 
 
-var crTreelist = function () {
+var crTreelist = function (crCommon) {
     return {
         restrict: 'E',
         templateUrl: '/Content/scripts/components/cr-treelist/cr-treelist.tmpl.html',
@@ -43,6 +43,30 @@ var crTreelist = function () {
             //        }
             //    }
             //});
+
+            $scope.$watch('treeListModel.dataSource', function () {
+                $scope.loadData();
+            });
+
+            $scope.loadData = function () {
+                if (typeof ($scope.treeListModel.dataSource) === 'string') {
+                    $scope.loadRemote();
+                }
+                else {
+                    $scope.loadLocal();
+                }
+            };
+
+            $scope.loadLocal = function () {
+                $scope.treeListModel.data = $scope.treeListModel.dataSource;
+            };
+
+            $scope.loadRemote = function () {
+                var onSuccess = function (response) {
+                    $scope.treeListModel.data = response;
+                }
+                crCommon.http.call({ api: $scope.treeListModel.dataSource, method: 'POST' }, onSuccess);
+            };
 
             $scope.itemOnClick = function (item) {
 
@@ -121,4 +145,4 @@ var crTreelist = function () {
     };
 };
 
-window.$applicationModule.directive('crTreelist', crTreelist);
+window.$applicationModule.directive('crTreelist', ['crCommon', crTreelist]);
