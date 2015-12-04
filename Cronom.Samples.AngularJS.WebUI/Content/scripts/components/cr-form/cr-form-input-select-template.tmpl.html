@@ -1,0 +1,3 @@
+﻿<label for="{{field}}">{{formModel.viewModel[field].label}}</label>
+<select class="form-control" name="{{field}}" ng-options="option as option.text for option in formModel.viewModel[field].options track by option.value" ng-model="formModel.viewData[field]"></select>
+<p ng-if="formModel.viewModel[field].required || formModel.viewModel[field].rule" ng-show="hasError(field)" class="help-block">{{formModel.viewModel[field].errorMessage}}</p>

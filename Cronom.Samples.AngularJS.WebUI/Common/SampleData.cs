@@ -117,5 +117,22 @@ namespace Cronom.Samples.AngularJS.WebUI.Common
             }
             return data;
         }
+
+        public static List<ListItemModel> TextEditorsAsList()
+        {
+            var list = new List<ListItemModel>
+            {
+                new ListItemModel{Id = "1",Title = "Notepad++"},
+                new ListItemModel{Id = "2",Title = "Notepad"},
+                new ListItemModel{Id = "3",Title = "Atom"},
+                new ListItemModel{Id = "4",Title = "Emacs"},
+                new ListItemModel{Id = "5",Title = "Vi"},
+                new ListItemModel{Id = "6",Title = "Vim"},
+                new ListItemModel{Id = "7",Title = "Sublime"},
+                new ListItemModel{Id = "8",Title = "KEdit"},
+            };
+
+            return list;
+        }
     }
 }

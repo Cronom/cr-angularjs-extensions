@@ -16,14 +16,15 @@ var crAutocomplete = function (crCommon) {
         restrict: 'E',
         templateUrl: '/Content/scripts/components/cr-autocomplete/cr-autocomplete.tmpl.html',
         replace: true,
+        transclude: true,
         require: '?ngModel',
         scope: {
             autocompleteModel: '=ngModel',
             defaultItem: '=',
-            onSelection: '='
+            onSelection: '=',
+            parentFieldName: '=',
         },
         controller: function ($scope) {
-
             $scope.changeFromSelection = false;
             $scope.selectionHash = -1;
             $scope.isLoading = false;
@@ -109,7 +110,7 @@ var crAutocomplete = function (crCommon) {
                 var selectionCallback = $scope.onSelection || $scope.autocompleteModel.onItemSelected;
 
                 if (selectionCallback) {
-                    selectionCallback(item, $index);
+                    selectionCallback(item, $index, $scope.parentFieldName);
                 }
 
                 if ($scope.autocompleteModel.closeOnSelect) {

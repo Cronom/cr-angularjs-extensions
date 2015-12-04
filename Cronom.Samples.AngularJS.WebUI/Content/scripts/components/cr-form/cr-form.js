@@ -30,30 +30,32 @@ ngModel definition
 */
 
 var crForm = function () {
-    return {
+    var crForm = {
         restrict: 'E',
         templateUrl: '/Content/scripts/components/cr-form/cr-form.tmpl.html',
         replace: true,
+        transclude: true,
         require: '?ngModel',
         scope: {
             formModel: '=ngModel'
         },
         controller: function ($scope) {
 
-            $scope.renderType = {
-                'text': 'input_generic_template',
-                'number': 'input_generic_template',
-                'email': 'input_generic_template',
-                'password': 'input_generic_template',
-                'date': 'input_generic_template',
-                'datetime': 'input_generic_template',
-                'checkbox': 'input_checkbox_template',
-                'select': 'input_select_template'
+            $scope.renderTypeTemplateMappings = {
+                'text': '/Content/scripts/components/cr-form/cr-form-input-generic-template.tmpl.html',
+                'number': '/Content/scripts/components/cr-form/cr-form-input-generic-template.tmpl.html',
+                'email': '/Content/scripts/components/cr-form/cr-form-input-generic-template.tmpl.html',
+                'password': '/Content/scripts/components/cr-form/cr-form-input-generic-template.tmpl.html',
+                'date': '/Content/scripts/components/cr-form/cr-form-input-generic-template.tmpl.html',
+                'datetime': '/Content/scripts/components/cr-form/cr-form-input-generic-template.tmpl.html',
+                'checkbox': '/Content/scripts/components/cr-form/cr-form-input-checkbox-template.tmpl.html',
+                'select': '/Content/scripts/components/cr-form/cr-form-input-select-template.tmpl.html',
+                'autocomplete': '/Content/scripts/components/cr-form/cr-form-input-autocomplete-template.tmpl.html'
             };
 
             $scope.getFieldInputTemplate = function (field) {
                 var type = $scope.formModel.viewModel[field].type;
-                return $scope.renderType[type];
+                return $scope.renderTypeTemplateMappings[type];
             };
 
             $scope.$watch($scope.formModel.name, function (form) {
@@ -70,7 +72,7 @@ var crForm = function () {
 
             $scope.hasError = function (field) {
                 if (!$scope.formModel.form[field]) {
-                    console.log('$scope.formModel.form[' + field + '] undefined');
+                    //console.log('$scope.formModel.form[' + field + '] undefined');
                     return false;
                 }
                 var isExpressionValid = $scope.evaluateFormRule(field);
@@ -121,9 +123,15 @@ var crForm = function () {
                 $scope.formModel.viewModel._reset = true;
             };
 
+            $scope.wrappedComponent_ItemSelection = function (selection, index, fieldName) {
+                $scope.formModel.viewData[fieldName] = selection;
+            };
+
+
             $scope.resetForm();
         }
     };
+    return crForm;
 };
 
 window.$applicationModule.directive('crForm', [crForm]);

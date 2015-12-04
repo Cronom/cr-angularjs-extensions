@@ -42,6 +42,13 @@ namespace Cronom.Samples.AngularJS.WebUI.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult QueryFavoredTextEditor(string keyword)
+        {
+            var data = SampleData.TextEditorsAsList().FindAll(c => c.Title.ToLowerInvariant().Contains(keyword.ToLowerInvariant()));
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult PageForm()
         {
             return View();

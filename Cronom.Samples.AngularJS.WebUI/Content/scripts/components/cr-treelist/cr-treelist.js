@@ -23,7 +23,8 @@ var crTreelist = function () {
         scope: {
             treeListModel: '=ngModel',
             defaultItem: '=',
-            onSelection: '='
+            onSelection: '=',
+            parentFieldName: '='
         },
         controller: function ($scope, $rootScope) {
             $rootScope.depth = 0;
@@ -59,7 +60,7 @@ var crTreelist = function () {
                 var selectionCallback = $scope.onSelection || $scope.treeListModel.onItemSelected;
 
                 if (selectionCallback) {
-                    selectionCallback(item);
+                    selectionCallback(item, undefined, $scope.parentFieldName);
                 }
 
                 if ($scope.treeListModel.closeOnSelect && (!$scope.treeListModel.selectAndExpand || item.Children.length == 0)) {

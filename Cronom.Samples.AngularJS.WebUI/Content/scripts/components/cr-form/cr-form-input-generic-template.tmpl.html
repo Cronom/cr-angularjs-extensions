@@ -1,0 +1,3 @@
+﻿<label for="{{field}}">{{formModel.viewModel[field].label}}</label>
+<input type="{{formModel.viewModel[field].type}}" name="{{field}}" placeholder="{{formModel.viewModel[field].placeholder}}" class="form-control" ng-model="formModel.viewData[field]" ng-required="formModel.viewModel[field].required">
+<p ng-if="formModel.viewModel[field].required || formModel.viewModel[field].rule" ng-show="hasError(field)" class="help-block">{{formModel.viewModel[field].errorMessage}}</p>

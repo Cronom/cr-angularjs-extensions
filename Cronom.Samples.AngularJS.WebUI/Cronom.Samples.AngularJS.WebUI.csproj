@@ -134,6 +134,11 @@
     <Content Include="Content\scripts\components\cr-autocomplete\cr-autocomplete.js" />
     <Content Include="Content\scripts\components\cr-autocomplete\cr-autocomplete.tmpl.html" />
     <Content Include="Content\scripts\components\cr-common.js" />
+    <Content Include="Content\scripts\components\cr-form\cr-form-input-treelist-template.tmpl.html" />
+    <Content Include="Content\scripts\components\cr-form\cr-form-input-autocomplete-template.tmpl.html" />
+    <Content Include="Content\scripts\components\cr-form\cr-form-input-select-template.tmpl.html" />
+    <Content Include="Content\scripts\components\cr-form\cr-form-input-checkbox-template.tmpl.html" />
+    <Content Include="Content\scripts\components\cr-form\cr-form-input-generic-template.tmpl.html" />
     <Content Include="Content\scripts\components\cr-form\cr-form.tmpl.html" />
     <Content Include="Content\scripts\components\cr-form\cr-form.js" />
     <Content Include="Content\scripts\components\cr-treelist\cr-treelist.js" />

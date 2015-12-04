@@ -1,0 +1,7 @@
+﻿<div ng-if="formModel.viewModel[field].type=='checkbox'" class="checkbox">
+    <label>
+        <input type="{{formModel.viewModel[field].type}}" name="{{field}}" ng-model="formModel.viewData[field]" ng-required="formModel.viewModel[field].required">
+        {{formModel.viewModel[field].label}}
+    </label>
+</div>
+<p ng-if="formModel.viewModel[field].required || formModel.viewModel[field].rule" ng-show="hasError(field)" class="help-block">{{formModel.viewModel[field].errorMessage}}</p>
