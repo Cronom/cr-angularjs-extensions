@@ -1,0 +1,27 @@
+﻿<div class="row" ng-controller="compilePageController" ng-init="init()">
+
+    <h2>Dynamic Html Binding & Compile Directive</h2>
+
+    <div class="col-md-3">
+        <button class="btn btn-default" ng-click="addButton()">Set Or Add</button>
+    </div>
+    
+    <div class="alert alert-info col-md-3">
+        <div ng-repeat="button in htmlButtonInfo track by $index" compile="button"></div>
+    </div>
+
+    <div class="alert alert-warning col-md-3" compile="button">
+        <div ng-repeat="button in htmlButtonWarning track by $index" compile="button"></div>
+    </div>
+
+    <div class="alert alert-danger col-md-3" compile="button">
+        <div ng-repeat="button in htmlButtonDanger track by $index" compile="button"></div>
+    </div>
+
+
+</div>
+
+<!-- page controller -->
+<script src="~/Content/scripts/application/compile/compile-page-controller.js"></script>
+
+

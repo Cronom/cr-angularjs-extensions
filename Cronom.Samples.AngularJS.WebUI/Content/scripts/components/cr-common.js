@@ -156,3 +156,17 @@ window.$applicationModule.filter('unsafe', function ($sce) {
         return $sce.trustAsHtml(val);
     };
 });
+
+window.$applicationModule.directive('compile', function ($compile) {
+    return function (scope, element, attrs) {
+        scope.$watch(
+          function (scope) {
+              return scope.$eval(attrs.compile);
+          },
+          function (value) {
+              element.html(value);
+              $compile(element.contents())(scope);
+          }
+        );
+    };
+});

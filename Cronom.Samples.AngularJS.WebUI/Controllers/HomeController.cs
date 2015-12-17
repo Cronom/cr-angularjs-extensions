@@ -53,5 +53,10 @@ namespace Cronom.Samples.AngularJS.WebUI.Controllers
         {
             return View();
         }
+        
+        public ActionResult PageCompile()
+        {
+            return View();
+        }
     }
 }
